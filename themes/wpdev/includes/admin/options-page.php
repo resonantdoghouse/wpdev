@@ -57,7 +57,7 @@ function wpdev_theme_opts_page(){
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
                             </div>
-                               
+
                         </div>
                     </div>
                 </div>
@@ -81,5 +81,5 @@ function wpdev_theme_opts_page(){
     </div>
 </div>
 
-<?php   
+<?php
 }
