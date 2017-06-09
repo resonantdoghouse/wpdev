@@ -14,8 +14,9 @@ function wpdev_admin_enqueue(){
     wp_enqueue_style( 'wpdev_material_icons' );
 
     wp_register_script( 'wpdev_materialize' , get_template_directory_uri() . '/js/materialize.min.js', array(), false, true );
-    wp_register_script( 'wpdev_option' , get_template_directory_uri() . '/js/options.js' );
-    
+    wp_register_script( 'wpdev_options' , get_template_directory_uri() . '/js/options.js' );
+
+    wp_enqueue_media();
     wp_enqueue_script( 'wpdev_materialize' );
-    wp_enqueue_script( 'wpdev_option' );
+    wp_enqueue_script( 'wpdev_options' );
 }

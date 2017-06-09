@@ -53,8 +53,10 @@ function wpdev_theme_opts_page(){
                 </div>
 
                 <div class="row">
+
                     <h5><?php _e('Logo', 'wpdev'); ?></h5>
-                    <div class="col s6">
+
+                    <div class="col s2">
                         <div class="input-field">
                             <select name="wpdev_inputLogoType" id="wpdev_inputLogoType">
                                 <option value="1"><?php _e('Site Name', 'wpdev'); ?></option>
@@ -63,19 +65,23 @@ function wpdev_theme_opts_page(){
                             <label for="wpdev_inputLogoType"><?php _e('Logo Type', 'wpdev'); ?></label>
                         </div>
                     </div>
-                    <div class="col s6">
+
+                    <!-- image upload -->
+                    <div class="col s10">
                         <div class="file-field input-field">
                             <div class="btn" id="wpdev_uploadLogoImgBtn">
                                 <span><?php _e( 'Logo Image', 'wpdev' ); ?></span>
-                                <input type="file" id="wpdev_inputLogoImg">
+                                <input type="file" id="wpdev_inputLogoImgBtn">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
+                                <input class="file-path validate" type="text"
+                                       id="wpdev_inputLogoImg" name="wpdev_inputLogoImg"
+                                       value="<?php echo $theme_opts['logo_img']; ?>">
                             </div>
-
                         </div>
                     </div>
-                </div>
+
+                </div><!-- .row -->
 
                 <div class="row">
                     <h5><?php _e('Footer', 'wpdev'); ?></h5>
