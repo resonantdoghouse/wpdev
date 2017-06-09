@@ -1,6 +1,12 @@
-   
+
    <footer class="page-footer grey">
     <div class="container">
+
+      <?php
+      $theme_opts = get_option('wpdev_opts');
+      echo stripslashes_deep($theme_opts['footer']);
+      ?>
+
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Company Bio</h5>
@@ -34,7 +40,7 @@
       </div>
     </div>
   </footer>
-   
+
    <?php wp_footer(); ?>
 </body>
 </html>
