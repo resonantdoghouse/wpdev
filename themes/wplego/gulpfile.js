@@ -23,7 +23,7 @@ gulp.task('styles', function() {
 gulp.task('watch', function() {
 
     watch('./**/*.php', function() {
-        gulp.start('html');
+        gulp.start('php');
     });
 
     watch('./assets/css/**/*.css', function() {
