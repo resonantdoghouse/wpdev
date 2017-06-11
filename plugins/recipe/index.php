@@ -15,7 +15,7 @@ if( !function_exists( 'add_action' ) ){
 
 
 // Setup
-
+define( 'RECIPE_PLUGIN_URL', __FILE__ );
 
 // Includes
 include( 'inc/activate.php' );
