@@ -11,10 +11,13 @@ License: GPLv2 or later
 
 define( 'FEATURED_ENFORCER_VERSION', 1 );
 
-function featured_image_enforcer_enqueue_scripts(){
+function featured_image_enforcer_enqueue_scripts( $hook ){
+  if( 'post-new.php' != $hook )
+    return;
+
   wp_enqueue_script(
     'featured-image-enforcer',
-    plugins_url( 'js/feautured-image-enforcer.js', __FILE__ ),
+    plugins_url( 'js/featured-image-enforcer.js', __FILE__ ),
     array( 'jquery' ),
     FEATURED_ENFORCER_VERSION,
     true
