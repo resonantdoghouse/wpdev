@@ -24,6 +24,15 @@ function cupcake_register_endpoints(){
 		array(
 			'methods'   => 'POST',
 			'callback'  => 'cupcake_add_vote',
+			'args'      => array(
+				'id'        => array(
+					'required' => true,
+					'validate_callback' => function( $param, $request, $key ){
+						return is_numeric( $param ) and ! is_null( get_post( $param ) );
+					},
+					'sanitize_calback' => 'absint'
+				)
+			)
 		)
 	);
 }
