@@ -32,5 +32,12 @@ add_action( 'rest_api_init', 'cupcake_register_endpoints' );
 
 function cupcake_add_vote( WP_REST_Request $request ){
 
-	return $request->get_params();
+	$votes = intval( get_post_meta( $request->get_param( 'id' ), 'votes', true ) );
+
+	if ( false === (bool) update_post_meta( $request->get_param( 'id' ), 'votes', $votes +1 ) )
+		{
+			return new WP_ERROR( 'vote_error', __( 'Unable to add vote', 'rested' ), $request->get_param( 'id' ) );
+		}
+		return $votes + 1;
+
 }
