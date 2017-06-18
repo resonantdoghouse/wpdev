@@ -22,23 +22,61 @@ register_activation_hook( __FILE__, 'cupcake_activate' );
 function cupcake_register_endpoints(){
 	register_rest_route(
 		'cupcake-voting/v1',
+		'/votes/(?P<id>[\d]+)',
+		array(
+			'methods'               => 'GET',
+			'callback'              =>  'cupcake_get_vote',
+			'permission_callback'   => function(){
+				return true;
+			},
+			'args'  => array(
+				'id'    => array(
+						'validate_callback' => function( $param, $request, $key ) {
+						return ! is_null( get_post( $param ) );
+					}
+				)
+			)
+		)
+	);
+	register_rest_route(
+		'cupcake-voting/v1',
 		'/votes/',
 		array(
-			'methods'   => 'POST',
-			'callback'  => 'cupcake_add_vote',
-			'args'      => array(
-				'id'        => array(
-					'required' => true,
-					'validate_callback' => function( $param, $request, $key ){
-						return is_numeric( $param ) and ! is_null( get_post( $param ) );
-					},
-					'sanitize_callback' => 'absint'
-				)
+			array(
+				'methods'               => 'GET',
+				'callback'              => 'cupcake_get_votes',
+				'permission_callback'   => function(){
+					return current_user_can( 'manage_options' );
+				}
 			),
-			'permission_callback' => function(){
-				return is_user_logged_in();
-			}
+			array(
+				'methods'   => 'POST',
+				'callback'  => 'cupcake_add_vote',
+				'args'      => array(
+					'id'        => array(
+						'required' => true,
+						'validate_callback' => function( $param, $request, $key ){
+							return is_numeric( $param ) and ! is_null( get_post( $param ) );
+						},
+						'sanitize_callback' => 'absint'
+					),
+					'rating'    => array(
+						'required'          => true,
+						'validate_callback' => function($param, $request, $key){
+							return is_numeric( $param ) and intval( $param ) >= 1 and intval( $param ) <= 5;
+						},
+						'sanitize_callback' => 'absint'
+					),
+					'review'    => array(
+						'required'          => false,
+						'sanitize_callback' => function($param, $request, $key){
+							return strip_tags( $param );
+						}
+					)
+				)
+			)
 		)
+
 	);
 }
 add_action( 'rest_api_init', 'cupcake_register_endpoints' );
@@ -67,6 +105,7 @@ add_action( 'wp_enqueue_scripts', 'cupcake_enqueue_scripts' );
 
 
 function cupcake_add_vote( WP_REST_Request $request ){
+	return $request->get_params();
 	$votes = intval( get_post_meta( $request->get_param( 'id' ), 'votes', true ) );
 	if ( false === (bool) update_post_meta( $request->get_param( 'id' ), 'votes', $votes +1 ) )
 		{
