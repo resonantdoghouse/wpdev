@@ -1,12 +1,12 @@
 <?php
-/*
-Plugin Name: Featured Image Enforcer
-Plugin URI: https://buildcreativewebsites.com
-Description: Forces featured image set before publishing post
-Version: 1.0
-Author: BCW
-Author URI: https://buildcreativewebsites.com
-License: GPLv2 or later
+/**
+ * Plugin Name: Featured Image Enforcer
+ * Plugin URI: https://buildcreativewebsites.com
+ * Description: Forces featured image set before publishing post
+ * Version: 1.0
+ * Author: BCW
+ * Author URI: https://buildcreativewebsites.com
+ * License: GPLv2 or later
 */
 
 define( 'FEATURED_ENFORCER_VERSION', 1 );
